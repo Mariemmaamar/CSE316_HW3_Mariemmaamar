@@ -1,0 +1,42 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: cse316_final_mysql_v2
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: shopdb
+      MYSQL_USER: appuser
+      MYSQL_PASSWORD: apppass
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data_v2:/var/lib/mysql
+      - ./database/init.sql:/docker-entrypoint-initdb.d/01_init.sql:ro
+
+  backend:
+    build: ./backend
+    container_name: cse316_final_backend_v2
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=db
+      - DB_USER=appuser
+      - DB_PASSWORD=apppass
+      - DB_NAME=shopdb
+      - DB_PORT=3306
+      - PORT=8080
+    ports:
+      - "8080:8080"
+    command: ["npm","run","dev"]
+
+  frontend:
+    build: ./frontend
+    container_name: cse316_final_frontend_v2
+    depends_on:
+      - backend
+    ports:
+      - "5173:80"
+
+volumes:
+  db_data_v2:

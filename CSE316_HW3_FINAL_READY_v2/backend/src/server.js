@@ -1,0 +1,18 @@
+import express from 'express';
+import cors from 'cors';
+import morgan from 'morgan';
+import productsRoutes from './routes/products.routes.js';
+import cartRoutes from './routes/cart.routes.js';
+import wishlistRoutes from './routes/wishlist.routes.js';
+import { errorHandler } from './utils/errorHandler.js';
+const PORT = Number(process.env.PORT || 8080);
+const app = express();
+app.use(cors({origin:true}));
+app.use(express.json());
+app.use(morgan('dev'));
+app.get('/',(req,res)=>res.json({ok:true,service:'backend'}));
+app.use('/api/products', productsRoutes);
+app.use('/api/cart', cartRoutes);
+app.use('/api/wishlist', wishlistRoutes);
+app.use(errorHandler);
+app.listen(PORT, ()=>console.log(`Backend listening on :${PORT}`));

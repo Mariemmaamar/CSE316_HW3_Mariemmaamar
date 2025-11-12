@@ -1,0 +1,88 @@
+/* --- Styles de Base et Effet de Survol --- */
+
+/* La carte dans son ensemble */
+.card.product-card {
+    border: 1px solid #e0e0e0; /* Bordure fine pour le look épuré */
+    border-radius: 8px; /* Coins arrondis */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Ombre très légère */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* Effet de Survol (HOVER) sur la Carte */
+.card.product-card:hover {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); /* Ombre plus prononcée */
+    transform: translateY(-8px); /* Élévation plus visible */
+    cursor: pointer;
+}
+
+/* --- Gestion des Images (Adaptative et Complète) --- */
+
+/* Conteneur de l'image : assure une hauteur fixe (200px) et un centrage parfait */
+.card-img-container {
+    padding: 15px 15px 5px 15px; /* Padding ajusté pour l'espace blanc */
+    height: 200px; 
+    overflow: hidden; 
+    
+    /* Flexbox pour centrer verticalement et horizontalement */
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+}
+
+/* Image elle-même : adaptative, centrée et entière (non coupée) */
+.card-img-top-custom {
+    max-height: 100%; 
+    max-width: 100%;
+    
+    /* Garantit que TOUTE l'image est visible */
+    object-fit: contain; 
+    object-position: center center; 
+    
+    /* Effet de zoom lors du survol */
+    transition: transform 0.3s ease-in-out; 
+}
+
+.card.product-card:hover .card-img-top-custom {
+    transform: scale(1.05); 
+}
+
+
+/* --- Centrage et Style du Contenu Textuel --- */
+
+/* Tous les éléments dans le corps de la carte seront centrés horizontalement */
+.card-body {
+    text-align: center;
+    /* Retrait du padding par défaut de Bootstrap pour un look plus compact */
+    padding: 10px 15px; 
+}
+
+.card-body .card-title {
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.card-body .card-subtitle {
+    font-size: 0.85em;
+    margin-bottom: 8px !important;
+}
+
+/* Style du prix */
+.card-body .card-text strong {
+    font-size: 1.2em;
+    color: #007bff; /* Couleur bleue pour le prix, comme dans l'exemple */
+}
+
+/* --- Style et Alignement des Boutons (Pied de Carte) --- */
+
+.card-footer.product-buttons {
+    background-color: white; /* Fond blanc pour séparer visuellement */
+    border-top: none; /* Supprime la ligne de séparation du pied de carte */
+    padding: 10px 15px 15px 15px; /* Padding pour l'espace autour des boutons */
+}
+
+.card-footer.product-buttons .btn {
+    /* Boutons en pleine largeur (w-100 dans JS) */
+    font-size: 0.9em;
+    text-transform: uppercase;
+}
